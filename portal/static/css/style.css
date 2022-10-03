@@ -1,0 +1,50 @@
+@font-face{
+    font-family: "Gt";
+    src: url("../fonts/Century Gothic Regular.ttf");
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+header{
+    width: 100wf;
+    height: 50px;
+    background-color: #ccc4b4;
+    display: flex;
+    justify-content: space-around;
+}
+
+header > div:nth-child(1){
+    margin-top: 15px;
+    height: 40px;
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+}
+
+header > div:nth-child(2){
+    margin-top: 15px;
+    height: 40px;
+    width: 15%;
+    display: flex;
+    justify-content: space-around;
+}
+
+header > div:nth-child(1) > a{
+    font-family: "Un";
+    color: rgb(30,30,30);
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+header > div:nth-child(2) > a{
+    color: #1c7364;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+
+
+
