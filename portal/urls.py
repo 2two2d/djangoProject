@@ -4,6 +4,6 @@ from django.urls import re_path as url
 
 
 urlpatterns = [
-    url('', views.index, name='index')
-
+    url('', views.main_page, name='main'),
+    url('register/', views.register, name='register')
 ]
