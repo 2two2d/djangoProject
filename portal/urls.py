@@ -5,5 +5,5 @@ from django.urls import re_path as url
 
 urlpatterns = [
     url('', views.main_page, name='main'),
-    url('register/', views.register, name='register')
+    url('registration/', views.register, name='register')
 ]

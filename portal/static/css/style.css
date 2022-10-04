@@ -92,6 +92,7 @@ header > div:nth-child(2) > a{
 
 #form td > input{
     border-radius: 5px;
+    width: 205px;
 }
 
 #form_error_text{
