@@ -4,6 +4,6 @@ from django.urls import re_path as url
 
 
 urlpatterns = [
-    url('', views.main_page, name='main'),
-    url('registration/', views.register, name='register')
+    url(r'^$', views.main_page, name='main'),
+    url(r'^registration/$', views.register, name='register')
 ]

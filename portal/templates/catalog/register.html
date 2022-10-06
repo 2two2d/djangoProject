@@ -1,0 +1,11 @@
+{% extends 'base_gineric.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}<title>Регистрация</title>{% endblock %}
+{% block content %}
+    <form action="." method="post" id="register_form">
+        {{ user_form|crispy }}
+        {% csrf_token %}
+        <p><input type="submit" value="Создать аккаунт"></p>
+    </form>
+{% endblock %}

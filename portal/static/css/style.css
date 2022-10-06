@@ -99,6 +99,52 @@ header > div:nth-child(2) > a{
     color: coral;
 }
 
+#register_form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+}
+
+#register_form input{
+    border-radius: 5px;
+}
+
+#register_form > div{
+    margin: 7px;
+}
+
+#register_form label[for=id_checkbox]{
+    font-size: 10px;
+}
+
+#register_form input[type=submit]{
+    margin-top: 20px;
+    width:285px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    background: #1c7364;
+    font-size: 1.2em;
+    color: white;
+}
+
+#register_form input[type=submit]:hover{
+    background: white;
+    border: 3px solid #1c7364;
+    color: #1c7364
+}
+
+#register_form input[type=submit]:active{
+    background: white;
+    border: 3px solid #1c7364;
+    color: #1c7364;
+}
+
+
+
+
 
 
 
