@@ -3,7 +3,7 @@ from django import forms
 from django.core.validators import RegexValidator, EmailValidator
 
 class UserRegistrationForm(forms.ModelForm):
-    username = forms.CharField(label='Логин', widget=forms.TextInput,
+    username = forms.CharField(label='Username', widget=forms.TextInput,
                                validators=[RegexValidator(r'[a-zA-Z\-]', 'В логине доступны только латинские символы')],
                                required=True)
 
@@ -12,11 +12,11 @@ class UserRegistrationForm(forms.ModelForm):
                                                            'В ФИО доступна только кириллица, пробелы и дефис')],
                                 required=True)
 
-    password = forms.CharField(label='Пароль', widget=forms.PasswordInput, required=True)
-    password2 = forms.CharField(label='Повторите пароль', widget=forms.PasswordInput, required=True)
+    password = forms.CharField(label='Password', widget=forms.PasswordInput, required=True)
+    password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput, required=True)
     email = forms.EmailField(label='Email', widget=forms.EmailInput, required=True,
                              validators=[EmailValidator('Email не верен')])
-    checkbox = forms.CharField(label='Согласие на обработку персональных данных', widget=forms.CheckboxInput,
+    checkbox = forms.CharField(label='Privet information permission', widget=forms.CheckboxInput,
                                required=False)
 
     class Meta:

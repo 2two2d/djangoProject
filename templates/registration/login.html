@@ -1,35 +1,22 @@
-{% extends "main_page.html" %}
+{% extends "base_gineric.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}<title>login</title>{% endblock %}
 
 {% block content %}
-<div id="form">
-  {% if form.errors %}
-    <p id="form_error_text">Ошибка в логине или пароле, попробуйте ещё раз!</p>
-  {% endif %}
 
-  {% if next %}
-    {% if user.is_authenticated %}
-      <p>Чтобы увидеть эту страницу у вас должно быть разрешение.</p>
-    {% endif %}
-  {% endif %}
-
-  <form method="post" action="{% url 'login' %}">
+<form method="post" action="{% url 'login' %}" id="login_form">
   {% csrf_token %}
   <table>
 
-  <tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td><input type="text" value="{{ username }}"></td>
-  </tr>
+  {{ form|crispy }}
 
-  <tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td><input type="password" value="{{ password }}"></td>
-  </tr>
-  </table>
-
-  <input type="submit" value="Войти" />
+  <input type="submit" value="login" class="btn btn-success"/>
   <input type="hidden" name="next" value="{{ next }}" />
-  </form>
-  <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
-</div>
+  </table>
+  <p><a href="{% url 'register' %}">Registration</a></p>
+</form>
+
+
 {% endblock %}

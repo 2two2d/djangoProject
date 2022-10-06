@@ -46,82 +46,31 @@ header > div:nth-child(2) > a{
     font-size: 1.2em;
 }
 
-#form{
-    margin-top: 200px;
-    width: 100%;
-    height: 180px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-}
 
-#form > form > input[type=submit]{
-    margin-top: 20px;
-    width:285px;
-    height: 30px;
-    border-radius: 10px;
-    border: none;
-    background: #1c7364;
-    font-size: 1.2em;
-    color: white;
-}
 
-#form > form > input[type=submit]:hover{
-    background: white;
-    border: 3px solid #1c7364;
-    color: #1c7364;
-}
-
-#form > form > input[type=submit]:active{
-    background: white;
-    border: 3px solid #1c7364;
-    color: #1c7364;
-}
-
-#form > p > a{
-    text-decoration: none;
-    color: #1c7364;
-    font-size: 1.1em;
-    font-weight: 600;
-}
-
-#form > p > a:hover{
-    color: black;
-}
-
-#form td > input{
-    border-radius: 5px;
-    width: 205px;
-}
-
-#form_error_text{
-    color: coral;
-}
-
-#register_form{
+#register_form, #login_form{
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 200px;
+    margin-top: 100px;
 }
 
-#register_form input{
+#register_form input, #login_form input{
     border-radius: 5px;
 }
 
-#register_form > div{
+#register_form > div, #login_form div{
     margin: 7px;
 }
 
-#register_form label[for=id_checkbox]{
-    font-size: 10px;
+#register_form label[for=id_checkbox], #login_form label[for=id_checkbox]{
+    font-size: 12px;
 }
 
-#register_form input[type=submit]{
+#register_form input[type=submit], #login_form input[type=submit]{
     margin-top: 20px;
-    width:285px;
+    width:200px;
     height: 30px;
     border-radius: 10px;
     border: none;
@@ -130,16 +79,23 @@ header > div:nth-child(2) > a{
     color: white;
 }
 
-#register_form input[type=submit]:hover{
+#register_form input[type=submit]:hover, #login_form input[type=submit]:hover{
     background: white;
     border: 3px solid #1c7364;
     color: #1c7364
 }
 
-#register_form input[type=submit]:active{
+#register_form input[type=submit]:active, #login_form input[type=submit]:active{
     background: white;
     border: 3px solid #1c7364;
     color: #1c7364;
+}
+
+#login_form a{
+    margin-top: 10px;
+    color: #1c7364;
+    text-decoration: none;
+    font-size: 1.2em;
 }
 
 

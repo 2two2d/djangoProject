@@ -1,9 +1,9 @@
-{% extends "main_page.html" %}
+{% extends "base_gineric.html" %}
 
-{% block title %}<title>Выход</title>{% endblock %}
+{% block title %}<title>logout</title>{% endblock %}
 
 {% block content %}
-<p>Вы вышли из аккаунта!</p>
+<p>You have logged out!</p>
 
-<a href="{% url 'login'%}">Зайти снова.</a>
+<a href="{% url 'login'%}">Login again.</a>
 {% endblock %}
