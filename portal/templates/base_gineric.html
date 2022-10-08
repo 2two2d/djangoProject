@@ -13,9 +13,10 @@
   <header>
       <div>
           <a href="{% url 'main' %}">Main</a>
-          <a href="">Раздел 2</a>
-          <a href="">Раздел 3</a>
-          <a href="">Раздел 4</a>
+          {% if user.is_authenticated %}
+            <a href="">Create_Project</a>
+            <a href="">My_projects</a>
+          {% endif %}
       </div>
       <div>
           {% if user.is_authenticated %}
