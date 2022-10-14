@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import UserRegistrationForm
 from .models import User
+from .models import Project
 
 # Create your views here.
 
@@ -25,7 +26,9 @@ def register(request):
     return render(request, 'registrations/register.html', {'user_form': user_form})
 
 def create_project(request):
-    return render(request, 'create_project.html')
+    model =
+    return render(request, 'user_project_managment/create_project.html')
+
 def my_projects(request):
-    return render(request, 'my_projects.html')
+    return render(request, 'user_project_managment/my_projects.html')
 

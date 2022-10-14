@@ -1,10 +1,13 @@
 {% extends "base_gineric.html" %}
 
-{% block title %}<title>Create project</title>{% endblock %}
+{% load crispy_forms_tags %}
 
+{% block title %}<title>Создать заявку</title>{% endblock %}
 {% block content %}
-
-
-
-
+{{ wh_status }}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Создать" class="btn btn-success"/>
+</form>
 {% endblock %}

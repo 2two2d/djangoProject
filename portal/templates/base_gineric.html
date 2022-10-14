@@ -14,8 +14,8 @@
       <div>
           <a href="{% url 'main' %}">Main</a>
           {% if user.is_authenticated %}
-            <a href="">Create_Project</a>
-            <a href="">My_projects</a>
+            <a href="{% url 'create_project'%}">Create_Project</a>
+            <a href="{% url 'my_projects'%}">My_projects</a>
           {% endif %}
       </div>
       <div>
