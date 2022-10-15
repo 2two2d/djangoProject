@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, ApplicationForm
 from .models import User
 from .models import Project
-
+from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 # Create your views here.
 
 def main_page(request):
@@ -25,10 +27,19 @@ def register(request):
         user_form = UserRegistrationForm()
     return render(request, 'registrations/register.html', {'user_form': user_form})
 
-def create_project(request):
-    model =
-    return render(request, 'user_project_managment/create_project.html')
+class create_project(LoginRequiredMixin, generic.CreateView):
+    model = Project
+    success_url = reverse_lazy('main')
+    form_class = ApplicationForm
+    template_name = 'user_project_managment/create_project.html'
 
-def my_projects(request):
-    return render(request, 'user_project_managment/my_projects.html')
+    def form_valid(self, form):
+        fields = form.save(commit=True)
+        fields.borrower = self.request.user
+        fields.save()
+        return super().form_valid(form)
+
+def my_projects(requset):
+    context = Project.objects.filter(user=User.id)
+    return render(requset, 'user_project_managment/my_projects.html', {'projects':context})
 

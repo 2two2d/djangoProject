@@ -30,9 +30,9 @@ class Project(models.Model):
     user = models.ForeignKey(User,on_delete=models.SET_NULL,verbose_name='Project owner', null=True, blank=True, to_field='id')
 
     PROCESS_STATUS = (('i', 'In process'),
-                      ('d','done'))
+                      ('d', 'done'))
 
-    TYPE_STATUS = (('f','2D design'),
+    TYPE_STATUS = (('f', '2D design'),
                    ('v', '3D design'),
                    ('s', 'Sketch'))
 
@@ -47,8 +47,7 @@ class Project(models.Model):
         max_length=1,
         choices=TYPE_STATUS,
         blank=True,
-        default='f',
-        help_text='Type of design')
+        default='f')
 
     def __str__(self):
         return self.name + f'(type - {self.type_status})'
