@@ -25,9 +25,9 @@ class Project(models.Model):
     id = models.AutoField(primary_key=True, unique=True, verbose_name='id')
     name = models.CharField(max_length=100, verbose_name='Project name')
     description = models.TextField(max_length=400, verbose_name='Description')
-    img = models.ImageField(upload_to='img', verbose_name='picture')
+    img = models.ImageField(upload_to='img/', verbose_name='picture')
     apply_date = models.DateTimeField(default=datetime.now(), editable=False)
-    user = models.ForeignKey(User,on_delete=models.SET_NULL,verbose_name='Project owner', null=True, blank=True, to_field='id')
+    author = models.ForeignKey('User', on_delete=models.SET_NULL, verbose_name='Project owner', editable=False, null=True, blank=True, to_field='id')
 
     PROCESS_STATUS = (('i', 'In process'),
                       ('d', 'done'))
@@ -54,6 +54,9 @@ class Project(models.Model):
 
     def delete(self, using=None, keep_parents=False):
         self.delete()
+
+    def get_absolute_url(self):
+        return reverse('profile_application_detail', args=[str(self.id)])
 
 
 

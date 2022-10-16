@@ -8,6 +8,11 @@
     padding: 0px;
 }
 
+textarea{
+    resize: none;
+    border-radius: 5px;
+}
+
 header{
     width: 100wf;
     height: 50px;
@@ -56,19 +61,19 @@ form{
     margin-top: 100px;
 }
 
-#register_form input, #login_form input{
+form input{
     border-radius: 5px;
 }
 
-#register_form > div, #login_form div{
+form div{
     margin: 7px;
 }
 
-#register_form label[for=id_checkbox], #login_form label[for=id_checkbox]{
-    font-size: 12px;
+form label{
+    font-size: 16px;
 }
 
-#register_form input[type=submit], #login_form input[type=submit]{
+form input[type=submit]{
     margin-top: 20px;
     width:200px;
     height: 30px;
@@ -79,13 +84,13 @@ form{
     color: white;
 }
 
-#register_form input[type=submit]:hover, #login_form input[type=submit]:hover{
+form input[type=submit]:hover{
     background: white;
     border: 3px solid #1c7364;
     color: #1c7364
 }
 
-#register_form input[type=submit]:active, #login_form input[type=submit]:active{
+form input[type=submit]:active{
     background: white;
     border: 3px solid #1c7364;
     color: #1c7364;
@@ -98,7 +103,36 @@ form{
     font-size: 1.2em;
 }
 
+label[for=id_type_status], label[for=id_img]{
+    display: none;
+}
 
+form div[id=div_id_type_status]{
+    position: relative;
+    right: 110px;
+}
+
+form div[id=div_id_img]{
+    position: relative;
+    left: 80px;
+    bottom: 49px;
+}
+
+#my_projects_div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.project_post{
+    width: 800px;
+    height: 300px;
+    border-right: 4px solid #1c7364;
+    border-left: 4px solid #1c7364;
+    border-radius: 20px;
+}
 
 
 

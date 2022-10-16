@@ -39,7 +39,12 @@ class create_project(LoginRequiredMixin, generic.CreateView):
         fields.save()
         return super().form_valid(form)
 
-def my_projects(requset):
-    context = Project.objects.filter(user=User.id)
-    return render(requset, 'user_project_managment/my_projects.html', {'projects':context})
+class my_projects(LoginRequiredMixin, generic.ListView):
+    model = Project
+    template_name = 'user_project_managment/my_projects.html'
+    context_object_name = 'Projects'
+    paginate_by = 10
+    def get_queryset(self):
+        return Project.objects.filter(author=self.request.user.id)
+
 
