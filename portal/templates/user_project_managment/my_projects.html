@@ -7,7 +7,7 @@
     {% if Projects %}
         {% for project in Projects %}
             <div class="project_post">
-                <img src="..{{ project.img.url }}" alt="..." width="30" height="30">
+                <img src="{{ project.img.url }}" alt="..." width="30" height="30">
             </div>
         {% endfor %}
     {% else %}

@@ -27,7 +27,7 @@ class Project(models.Model):
     description = models.TextField(max_length=400, verbose_name='Description')
     img = models.ImageField(upload_to='img/', verbose_name='picture')
     apply_date = models.DateTimeField(default=datetime.now(), editable=False)
-    author = models.ForeignKey('User', on_delete=models.SET_NULL, verbose_name='Project owner', editable=False, null=True, blank=True, to_field='id')
+    author = models.ForeignKey('User', on_delete=models.SET_NULL, verbose_name='Project owner', null=True, blank=True, to_field='id')
 
     PROCESS_STATUS = (('i', 'In process'),
                       ('d', 'done'))

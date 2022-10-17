@@ -9,3 +9,4 @@ urlpatterns = [
     url(r'^createproject/$', views.create_project.as_view(), name='create_project'),
     url(r'^myprojects/$', views.my_projects.as_view(), name='my_projects')
 ]
+

@@ -5,6 +5,8 @@ from .models import Project
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+
+
 # Create your views here.
 
 def main_page(request):
@@ -27,6 +29,7 @@ def register(request):
         user_form = UserRegistrationForm()
     return render(request, 'registrations/register.html', {'user_form': user_form})
 
+
 class create_project(LoginRequiredMixin, generic.CreateView):
     model = Project
     success_url = reverse_lazy('main')
@@ -39,12 +42,12 @@ class create_project(LoginRequiredMixin, generic.CreateView):
         fields.save()
         return super().form_valid(form)
 
+
 class my_projects(LoginRequiredMixin, generic.ListView):
     model = Project
     template_name = 'user_project_managment/my_projects.html'
     context_object_name = 'Projects'
     paginate_by = 10
+
     def get_queryset(self):
         return Project.objects.filter(author=self.request.user.id)
-
-
