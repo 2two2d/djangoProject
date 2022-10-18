@@ -52,12 +52,9 @@ class Project(models.Model):
     def __str__(self):
         return self.name + f'(type - {self.type_status})'
 
-    def delete(self, using=None, keep_parents=False):
-        self.delete()
 
     def get_absolute_url(self):
         return reverse('profile_application_detail', args=[str(self.id)])
-
 
 
 # Create your models here.

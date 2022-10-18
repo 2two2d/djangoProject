@@ -1,0 +1,8 @@
+{% extends "base_gineric.html" %}
+
+{% block title %}<title>Project has been deleted</title>{% endblock %}
+
+{% block content %}
+  <p style="display: block; width: 100%; align-text: center; font-size: 3em">Проект удалён!</p>
+  <a id="back_to_projects" href="{% url 'my_projects'%}">Мои проекты</a>
+{% endblock %}

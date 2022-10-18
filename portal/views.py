@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import UserRegistrationForm, ApplicationForm
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from .models import User
 from .models import Project
 from django.views import generic
@@ -38,9 +39,18 @@ class create_project(LoginRequiredMixin, generic.CreateView):
 
     def form_valid(self, form):
         fields = form.save(commit=True)
-        fields.borrower = self.request.user
+        fields.author = self.request.user
         fields.save()
         return super().form_valid(form)
+
+class delete_project(LoginRequiredMixin, generic.DeleteView):
+    model = Project
+    success_url = "user_project_managment/delete_success.html"
+    success_msg = 'Запись удалена'
+    def form_valid(self, form):
+        self.object.delete()
+        return HttpResponseRedirect(success_url, success_msg)
+
 
 
 class my_projects(LoginRequiredMixin, generic.ListView):
