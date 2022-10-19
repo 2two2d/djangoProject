@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import UserRegistrationForm, ApplicationForm
-from django.shortcuts import render, HttpResponseRedirect, redirect
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from .models import User
 from .models import Project
 from django.views import generic
@@ -33,7 +33,8 @@ def register(request):
 
 class create_project(LoginRequiredMixin, generic.CreateView):
     model = Project
-    success_url = reverse_lazy('main')
+    fields = ['name', 'description', 'status_type', 'img']
+    success_url = reverse_lazy('my_projects')
     form_class = ApplicationForm
     template_name = 'user_project_managment/create_project.html'
 
@@ -43,16 +44,6 @@ class create_project(LoginRequiredMixin, generic.CreateView):
         fields.save()
         return super().form_valid(form)
 
-class delete_project(LoginRequiredMixin, generic.DeleteView):
-    model = Project
-    success_url = "user_project_managment/delete_success.html"
-    success_msg = 'Запись удалена'
-    def form_valid(self, form):
-        self.object.delete()
-        return HttpResponseRedirect(success_url, success_msg)
-
-
-
 class my_projects(LoginRequiredMixin, generic.ListView):
     model = Project
     template_name = 'user_project_managment/my_projects.html'
@@ -61,3 +52,25 @@ class my_projects(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return Project.objects.filter(author=self.request.user.id)
+
+class ProjectDetail(generic.DetailView):
+    model = Project
+    context_object_name = 'project'
+    template_name = 'user_project_managment/project_detail.html'
+class ProjectDelete(generic.DeleteView):
+    model = Project
+    template_name = 'user_project_managment/delete_success.html'
+
+    def get_object(self, queryset=None):
+        """
+        Check the logged in user is the owner of the object or 404
+        """
+        record = super(ProjectDelete, self).get_object(queryset)
+        if record.type_status == 'n':
+            if record.Auther != self.request.user:
+                raise Http404("You don't own this object")
+
+            return record
+
+
+

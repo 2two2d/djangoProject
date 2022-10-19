@@ -9,14 +9,12 @@
             <div class="project_post">
                 <div class="picture_div_post">
                     <p class="project_name">{{project.name}}</p>
-                    <img src="{{ project.img.url }}" alt="..." width="180" height="180">
+                    <img src="{{ project.img.url }}" alt="..." width="176" height="176">
                 </div>
                 <div class="description_div_post">
-                    <p>Описание:</p>
-                    <p class="project_description">{{project.description}}</p>
                     <p>Тип: {{project.get_type_status_display}}</p>
                     <p>Процесс: {{project.get_process_status_display}}</p>
-                    <a class="del_post_button" href="{% url 'delete_project' project.id %}">Удалить проект</a>
+                    <a class="show_detail" href="{% url 'detail_project' project.id %}">Редактирование</a>
                 </div>
             </div>
         {% endfor %}

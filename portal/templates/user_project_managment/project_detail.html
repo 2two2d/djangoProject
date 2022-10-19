@@ -1,0 +1,27 @@
+{% extends "base_gineric.html" %}
+
+{% block title %}<title>Редактирование</title>{% endblock %}
+
+{% block content %}
+    <div id="project_detail">
+        <div class="project_post">
+                <div class="picture_div_post">
+                    <p class="project_name">{{project.name}}</p>
+                    <img src="{{ project.img.url }}" alt="..." width="176" height="176">
+                </div>
+                <div class="description_div_post">
+                    <p>Автор: {{ project.author.full_name }}</p>
+                    <p>Дата: {{ project.apply_date }}</p>
+                    <p>Тип: {{project.get_type_status_display}}</p>
+                    <p>Процесс: {{project.get_process_status_display}}</p>
+                    <a id="update_btn" href="{% url 'detail_project' project.id %}">Редактировать</a>
+                    <a id="delete_btn" href="{% url 'detail_project' project.id %}">Удалить</a>
+                </div>
+            </div>
+        <div id="detail_description_div">
+            <p style="font-size: 20px;">Описание:</p><br>
+            <p id="description">{{project.description}}</p><br>
+            <a id="back_to_projects" href="{% url 'my_projects' %}">Назад</a>
+        </div>
+    </div>
+{% endblock %}

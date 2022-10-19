@@ -30,7 +30,8 @@ class Project(models.Model):
     author = models.ForeignKey('User', on_delete=models.SET_NULL, verbose_name='Project owner', null=True, blank=True, to_field='id')
 
     PROCESS_STATUS = (('i', 'In process'),
-                      ('d', 'done'))
+                      ('d', 'done'),
+                      ('n', 'new'))
 
     TYPE_STATUS = (('f', '2D design'),
                    ('v', '3D design'),

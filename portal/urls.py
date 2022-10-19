@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^registration/$', views.register, name='register'),
     url(r'^createproject/$', views.create_project.as_view(), name='create_project'),
     url(r'^myprojects/$', views.my_projects.as_view(), name='my_projects'),
-    url(r'^myprojects/<int:pk>/delete/$', views.delete_project.as_view(), name='delete_project')
+    url(r'^myprojects/(?P<pk>\d+)/detail/$', views.ProjectDetail.as_view(), name='detail_project'),
+    url(r'^myprojects/(?P<pk>\d+)/delete/$', views.ProjectDelete.as_view(), name='delete_project')
 ]
 

@@ -130,7 +130,7 @@ form div[id=div_id_img]{
     display: flex;
     justify-content: space-between;
     margin-top: 40px;
-    width: 800px;
+    width: 600px;
     height: 200px;
     border-left: 2px solid #1c7364;
 }
@@ -148,19 +148,25 @@ form div[id=div_id_img]{
 .description_div_post{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: flex-end;
+    justify-content: space-around;
     height: 200px;
     width: 400px;
 }
 
-.project_description{
+
+#back_to_projects_div{
+    margin-top: 50px;
     width: 100%;
-    height: 50px;
-    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100px;
+    justify-content: space-between;
 }
 
-.del_post_button, #back_to_projects{
-    margin-left: auto;
+.show_detail, #back_to_projects, #update_btn, #delete_btn{
+    padding: 0 4px 0 4px;
     text-align: center;
     text-decoration: none;
     width:200px;
@@ -172,21 +178,48 @@ form div[id=div_id_img]{
     color: white;
 }
 
-.del_post_button:hover , #back_to_projects:hover{
+.show_detail:hover , #back_to_projects:hover, #update_btn:hover, #delete_btn:hover{
     height: 24px;
     background: white;
     border: 3px solid #1c7364;
     color: #1c7364
 }
 
-.del_post_button:active, #back_to_projects:active{
+.show_detail:active, #back_to_projects:active, #update_btn:active, #delete_btn:active{
     height: 24px;
     background: white;
     border: 3px solid #1c7364;
     color: #1c7364;
 }
 
+#project_detail{
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
 
+#delete_btn{
+    background-color: red;
+}
+
+#delete_btn:hover{
+    background-color: white;
+    border: 3px solid red;
+    color: red;
+}
+
+#delete_btn:active{
+    background-color: white;
+    color: red;
+    border: 3px solid #1c7364;
+}
+
+#detail_description_div{
+    width: 620px;
+}
 
 
 
