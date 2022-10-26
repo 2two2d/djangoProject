@@ -15,7 +15,7 @@
                     <p>Тип: {{project.get_type_status_display}}</p>
                     <p>Процесс: {{project.get_process_status_display}}</p>
                     <a id="update_btn" href="{% url 'detail_project' project.id %}">Редактировать</a>
-                    <a id="delete_btn" href="{% url 'detail_project' project.id %}">Удалить</a>
+                    <a id="delete_btn" href="{% url 'delete_project' project.id %}">Удалить</a>
                 </div>
             </div>
         <div id="detail_description_div">

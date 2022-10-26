@@ -36,7 +36,18 @@ class UserRegistrationForm(forms.ModelForm):
             raise forms.ValidationError('Подтвердите обработку персональных данных')
         return cd['checkbox']
 
-class ApplicationForm(forms.ModelForm):
+
+class ApplicationCreateForm(forms.ModelForm):
+    title = forms.CharField(label='Название', widget=forms.TextInput)
+    description = forms.CharField(label='Описание', widget=forms.TextInput)
+    # img = forms.ImageField(label='Изображение', widget=forms.ImageField)
+    #
+    # TYPE_STATUS = (('f', '2D design'),
+    #                ('v', '3D design'),
+    #                ('s', 'Sketch'))
+    #
+    # type_status = forms.ChoiceField
+
     class Meta:
         model = Project
-        fields = ['name', 'description', 'type_status', 'img']
+        fields = ('title', 'description', 'img', 'type_status')

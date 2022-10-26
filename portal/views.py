@@ -1,9 +1,9 @@
-from django.shortcuts import render
-from .forms import UserRegistrationForm, ApplicationForm
+from django.shortcuts import render, redirect
+from .forms import UserRegistrationForm
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from .models import User
 from .models import Project
-from django.views import generic
+from django.views.generic import CreateView, DetailView, ListView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
@@ -31,12 +31,12 @@ def register(request):
     return render(request, 'registrations/register.html', {'user_form': user_form})
 
 
-class create_project(LoginRequiredMixin, generic.CreateView):
+class create_project(CreateView):
     model = Project
-    fields = ['name', 'description', 'status_type', 'img']
+    fields = ('name', 'description', 'type_status', 'img')
     success_url = reverse_lazy('my_projects')
-    form_class = ApplicationForm
     template_name = 'user_project_managment/create_project.html'
+    context_object_name = 'projects'
 
     def form_valid(self, form):
         fields = form.save(commit=True)
@@ -44,33 +44,36 @@ class create_project(LoginRequiredMixin, generic.CreateView):
         fields.save()
         return super().form_valid(form)
 
-class my_projects(LoginRequiredMixin, generic.ListView):
+class my_projects(ListView):
     model = Project
     template_name = 'user_project_managment/my_projects.html'
     context_object_name = 'Projects'
     paginate_by = 10
 
     def get_queryset(self):
-        return Project.objects.filter(author=self.request.user.id)
+        return Project.objects.filter(author=self.request.user)
 
-class ProjectDetail(generic.DetailView):
+class ProjectDetail(DetailView):
     model = Project
     context_object_name = 'project'
     template_name = 'user_project_managment/project_detail.html'
-class ProjectDelete(generic.DeleteView):
+
+def ProjectDeleteSuccess(request, pk):
+    return render(request, 'user_project_managment/delete_success.html')
+
+class ProjectDeleteConfirm(DeleteView):
     model = Project
-    template_name = 'user_project_managment/delete_success.html'
+    template_name = 'user_project_managment/delete_confirm.html'
 
-    def get_object(self, queryset=None):
-        """
-        Check the logged in user is the owner of the object or 404
-        """
-        record = super(ProjectDelete, self).get_object(queryset)
-        if record.type_status == 'n':
-            if record.Auther != self.request.user:
-                raise Http404("You don't own this object")
+    def from_valid(self):
+        if self.object.status != 'new':
+            return redirect('error')
+        else:
+            self.object.delete()
+            success_url = reverse_lazy('delete_success')
+            success_msg = 'Запись удалена'
+            return HttpResponseRedirect(success_url, success_msg)
 
-            return record
 
 
 
