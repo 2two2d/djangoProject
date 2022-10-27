@@ -58,22 +58,21 @@ class ProjectDetail(DetailView):
     context_object_name = 'project'
     template_name = 'user_project_managment/project_detail.html'
 
-def ProjectDeleteSuccess(request, pk):
-    return render(request, 'user_project_managment/delete_success.html')
-
 class ProjectDeleteConfirm(DeleteView):
     model = Project
     template_name = 'user_project_managment/delete_confirm.html'
-
+    success_url = reverse_lazy('my_projects')
     def from_valid(self):
         if self.object.status != 'new':
-            return redirect('error')
+            return redirect('delete_error')
         else:
             self.object.delete()
-            success_url = reverse_lazy('delete_success')
+            success_url = reverse_lazy('my_projects')
             success_msg = 'Запись удалена'
             return HttpResponseRedirect(success_url, success_msg)
 
+def delete_error(request):
+    return render(request, 'user_project_managment/delete_error.html')
 
 
 

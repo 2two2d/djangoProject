@@ -192,13 +192,17 @@ form div[id=div_id_img]{
     color: #1c7364;
 }
 
-#project_detail{
+#project_detail, #are_you_sure_div{
     width: 100%;
     height: 400px;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-around;
+}
+
+#are_you_sure_div{
+    height: 100px;
 }
 
 #delete_btn{
