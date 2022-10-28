@@ -165,7 +165,7 @@ form div[id=div_id_img]{
     justify-content: space-between;
 }
 
-.show_detail, #back_to_projects, #update_btn, #delete_btn{
+.show_detail, #back_to_projects, #update_btn, #delete_btn, #login_btn{
     padding: 0 4px 0 4px;
     text-align: center;
     text-decoration: none;
@@ -178,21 +178,21 @@ form div[id=div_id_img]{
     color: white;
 }
 
-.show_detail:hover , #back_to_projects:hover, #update_btn:hover, #delete_btn:hover{
+.show_detail:hover , #back_to_projects:hover, #update_btn:hover, #delete_btn:hover, #login_btn:hover{
     height: 24px;
     background: white;
     border: 3px solid #1c7364;
     color: #1c7364
 }
 
-.show_detail:active, #back_to_projects:active, #update_btn:active, #delete_btn:active{
+.show_detail:active, #back_to_projects:active, #update_btn:active, #delete_btn:active, #login_btn:active{
     height: 24px;
     background: white;
     border: 3px solid #1c7364;
     color: #1c7364;
 }
 
-#project_detail, #are_you_sure_div{
+#project_detail, #are_you_sure_div, #logged_out_div{
     width: 100%;
     height: 400px;
     display: flex;
@@ -201,7 +201,7 @@ form div[id=div_id_img]{
     justify-content: space-around;
 }
 
-#are_you_sure_div{
+#are_you_sure_div, #logged_out_div{
     height: 100px;
 }
 

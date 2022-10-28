@@ -41,7 +41,7 @@ class Project(models.Model):
         max_length=1,
         choices=PROCESS_STATUS,
         blank=True,
-        default='i',
+        default='n',
         help_text='Status of project')
 
     type_status = models.CharField(

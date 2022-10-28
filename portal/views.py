@@ -62,8 +62,9 @@ class ProjectDeleteConfirm(DeleteView):
     model = Project
     template_name = 'user_project_managment/delete_confirm.html'
     success_url = reverse_lazy('my_projects')
+    context_object_name = 'project'
     def from_valid(self):
-        if self.object.status != 'new':
+        if self.object.process_status != 'n':
             return redirect('delete_error')
         else:
             self.object.delete()
