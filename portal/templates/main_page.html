@@ -1,7 +1,34 @@
 {% extends "base_gineric.html" %}
 
-{% block title %}<title>Main</title>{% endblock %}
+{% block title %}<title>Your projects</title>{% endblock %}
 
 {% block content %}
-<p>Главная страница</p>
+<div id="my_projects_div">
+    <div id="filter_div">
+        <h3>фильтр</h3>
+        <a href="{% url 'my_projects' 'All' %}">All</a>
+        <a href="{% url 'my_projects' 'n' %}">New</a>
+        <a href="{% url 'my_projects' 'i' %}">In proccess</a>
+        <a href="{% url 'my_projects' 'd' %}">Done</a>
+        <p>Заявок_в_процессе: {{count_in_process}}</p>
+    </div>
+    {% if Projects %}
+        {% for project in Projects %}
+            <div class="project_post">
+                <div class="picture_div_post">
+                    <p class="project_name">{{project.name}}</p>
+                    <img src="{{ project.img.url }}" alt="..." width="176" height="176">
+                </div>
+                <div class="description_div_post">
+                    <p>Тип: {{project.get_type_status_display}}</p>
+                    <p>Процесс: {{project.get_process_status_display}}</p>
+                    <p>Дата: {{ project.apply_date }}</p>
+                    <a class="show_detail" href="{% url 'detail_project' project.id %}">Подробно</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Здесь пока нет проектов</p>
+    {% endif %}
+</div>
 {% endblock %}

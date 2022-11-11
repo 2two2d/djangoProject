@@ -12,10 +12,14 @@
 <body>
   <header>
       <div>
-          <a href="{% url 'main' %}">Main</a>
+          <a href="{% url 'main' 'All' %}">Main</a>
           {% if user.is_authenticated %}
             <a href="{% url 'create_project'%}">Create_Project</a>
-            <a href="{% url 'my_projects'%}">My_projects</a>
+            <a href="{% url 'my_projects' 'All'%}">My_projects</a>
+            {% if user.is_staff %}
+                <a href="{% url 'change_status' %}">Change_status</a>
+<!--                <a href=""></a>-->
+            {% endif %}
           {% endif %}
       </div>
       <div>

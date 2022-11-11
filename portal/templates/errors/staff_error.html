@@ -1,0 +1,10 @@
+{% extends "base_gineric.html" %}
+
+{% block title %}<title>Error</title>{% endblock %}
+
+{% block content %}
+<div id="back_to_projects_div">
+  <p style="display: block; align-text: center; font-size: 3em">Вы не являетесь администратором!</p>
+  <a id="back_to_projects" href="{% url 'login'%}">Войти</a>
+</div>
+{% endblock %}

@@ -165,7 +165,7 @@ form div[id=div_id_img]{
     justify-content: space-between;
 }
 
-.show_detail, #back_to_projects, #update_btn, #delete_btn, #login_btn{
+.show_detail, #back_to_projects, #update_btn, #delete_btn, #login_btn, .btn{
     padding: 0 4px 0 4px;
     text-align: center;
     text-decoration: none;
@@ -178,14 +178,14 @@ form div[id=div_id_img]{
     color: white;
 }
 
-.show_detail:hover , #back_to_projects:hover, #update_btn:hover, #delete_btn:hover, #login_btn:hover{
+.show_detail:hover , #back_to_projects:hover, #update_btn:hover, #delete_btn:hover, #login_btn:hover, .btn:hover{
     height: 24px;
     background: white;
     border: 3px solid #1c7364;
     color: #1c7364
 }
 
-.show_detail:active, #back_to_projects:active, #update_btn:active, #delete_btn:active, #login_btn:active{
+.show_detail:active, #back_to_projects:active, #update_btn:active, #delete_btn:active, #login_btn:active , .btn:active{
     height: 24px;
     background: white;
     border: 3px solid #1c7364;
@@ -225,7 +225,29 @@ form div[id=div_id_img]{
     width: 620px;
 }
 
+#filter_div{
+    display: flex;
+    width: 700px;
+    height: 40xp;
+    justify-content: space-around;
+    margin: 30px;
+    border: 2px solid #1c7364;
+    border-radius: 10px;
+}
 
+#change_status_btns_div{
+    width: 640px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#change_status_btns_div > a{
+    width: 140px;
+}
+
+#change_status_btns_div > a:nth-child(2), #change_status_btns_div > a:nth-child(3){
+    font-size: 14px;
+}
 
 
 
