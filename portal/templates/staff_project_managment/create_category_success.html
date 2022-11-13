@@ -1,0 +1,8 @@
+{% extends 'base_gineric.html' %}
+{% block title %}<title>Category created</title>{% endblock %}
+{% block content %}
+    <div id="back_to_projects_div">
+        <h1>You have successfully created new category</h1>
+        <a id="back_to_projects" href="{% url 'manage_categories'%}">Manage categories</a>
+    </div>
+{% endblock %}

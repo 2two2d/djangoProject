@@ -1,6 +1,6 @@
 {% extends "base_gineric.html" %}
 
-{% block title %}<title>Подтверждение</title>{% endblock %}
+{% block title %}<title>Delete confirm</title>{% endblock %}
 
 {% block content %}
 {% if  project.process_status == 'i' %}
@@ -15,7 +15,7 @@
 {% else %}
   <div id="back_to_projects_div">
     <p style="display: block; align-text: center; font-size: 3em">Проект невозможно удалить!</p>
-    <a id="back_to_projects" href="{% url 'my_projects'%}">Мои проекты</a>
+    <a id="back_to_projects" href="{% url 'my_projects' 'All'%}">Мои проекты</a>
   </div>
 {% endif %}
 {% endblock %}

@@ -6,10 +6,10 @@
 <div id="my_projects_div">
     <div id="filter_div">
         <h3>фильтр</h3>
-        <a href="{% url 'my_projects' 'All' %}">All</a>
-        <a href="{% url 'my_projects' 'n' %}">New</a>
-        <a href="{% url 'my_projects' 'i' %}">In proccess</a>
-        <a href="{% url 'my_projects' 'd' %}">Done</a>
+        <a href="{% url 'main' 'All' %}">All</a>
+        <a href="{% url 'main' 'n' %}">New</a>
+        <a href="{% url 'main' 'i' %}">In proccess</a>
+        <a href="{% url 'main' 'd' %}">Done</a>
         <p>Заявок_в_процессе: {{count_in_process}}</p>
     </div>
     {% if Projects %}
@@ -20,7 +20,7 @@
                     <img src="{{ project.img.url }}" alt="..." width="176" height="176">
                 </div>
                 <div class="description_div_post">
-                    <p>Тип: {{project.get_type_status_display}}</p>
+                    <p>Тип: {{project.category}}</p>
                     <p>Процесс: {{project.get_process_status_display}}</p>
                     <p>Дата: {{ project.apply_date }}</p>
                     <a class="show_detail" href="{% url 'detail_project' project.id %}">Подробно</a>

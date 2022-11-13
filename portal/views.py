@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
-from .forms import UserRegistrationForm
-from django.http import Http404, HttpResponseRedirect, HttpResponse
-from .models import User
-from .models import Project
-from django.views.generic import CreateView, DetailView, ListView, DeleteView
+from .forms import UserRegistrationForm, ApplicationCreateForm, AddImgForm, AddComForm, CreateCategoryForm
+from django.http import HttpResponseRedirect
+from .models import Project, Category
+from django.views.generic import DetailView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -39,18 +38,36 @@ def register(request):
     return render(request, 'registrations/register.html', {'user_form': user_form})
 
 
-class create_project(CreateView, LoginRequiredMixin):
-    model = Project
-    fields = ('name', 'description', 'type_status', 'img')
-    success_url = reverse_lazy('my_projects', args=('All',))
-    template_name = 'user_project_managment/create_project.html'
-    context_object_name = 'projects'
+def create_project(request):
+    if request.method == 'POST':
+        if not Category.objects.all():
+            return render(request, 'errors/category_error,html')
+        else:
+            form = ApplicationCreateForm(request.POST, request.FILES)
+            if form.is_valid():
+                Application = form.save(commit=False)
+                Application.author = request.user
+                Application.img = form.cleaned_data['img']
+                Application.save()
+                return redirect(reverse_lazy('my_projects', args=('All',)))
+    else:
+        form = ApplicationCreateForm()
 
-    def form_valid(self, form):
-        fields = form.save(commit=True)
-        fields.author = self.request.user
-        fields.save()
-        return super().form_valid(form)
+    return render(request, 'user_project_managment/create_project.html', {'form': form})
+
+    # model = Project
+    # fields = ('name', 'description', 'type_status', 'img')
+    # success_url = reverse_lazy('my_projects', args=('All',))
+    # template_name = 'user_project_managment/create_project.html'
+    # context_object_name = 'projects'
+    #
+    # form_class = ApplicationCreateForm
+    #
+    # def form_valid(self, form):
+    #     fields = form.save(commit=True)
+    #     fields.author = self.request.user
+    #     fields.save()
+    #     return super().form_valid(form)
 @login_required
 def my_projects(request, pk):
 
@@ -91,12 +108,60 @@ def change_status(request):
     else:
         return render(request, 'errors/staff_error.html', {})
 
-    return render(request, 'staff_project_managment/change_status.html', {'Projects': Projects})
+    return render(request, 'staff_project_managment/projects_to_change.html', {'Projects': Projects})
+
+# def projects_to_change(requset):
+#     return render(requset, 'staff_project_managment/projects_to_change.html', )
+
 
 def confirm_status_change(request, pk, st):
 
-    Project.get(id=pk).process_status = st
-    Project.get(id=pk).save()
+    new_Projects = Project.objects.get(id=pk)
 
-    return render(request, '' ,{})
+    new_Projects.save()
+
+    if st == 'd':
+        if request.method == 'POST':
+            form = AddImgForm(request.POST, request.FILES)
+            if form.is_valid():
+                new_Projects.img = form.cleaned_data['img']
+                new_Projects.process_status = st
+                new_Projects.save()
+                return render(request, 'staff_project_managment/change_status_success.html', {'new_Projects':new_Projects})
+        else:
+            form = AddImgForm()
+
+        return render(request, 'staff_project_managment/change_status.html', {'form': form})
+
+
+    elif st == 'i':
+        if request.method == 'POST':
+            form = AddComForm(request.POST)
+            if form.is_valid():
+                new_Projects.com = form.cleaned_data['com']
+                new_Projects.process_status = st
+                new_Projects.save()
+                return render(request, 'staff_project_managment/change_status_success.html', {'new_Projects':new_Projects})
+        else:
+            form = AddComForm()
+
+        return render(request, 'staff_project_managment/change_status.html', {'form': form})
+
+def change_category(request):
+    if request.method == 'POST':
+        form = CreateCategoryForm(request.POST)
+        if form.is_valid():
+            new_Category = form.save(commit=False)
+            new_Category.save()
+            return render(request, 'staff_project_managment/create_category_success.html', {})
+    else:
+        form = CreateCategoryForm()
+
+    categories = Category.objects.all()
+
+    return render(request, 'staff_project_managment/change_category.html', {'form': form, 'categories': categories})
+
+def category_delete(request, pk):
+    Category.objects.get(type=pk).delete()
+    return render(request, 'staff_project_managment/delete_category_success.html')
 

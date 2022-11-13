@@ -1,38 +1,11 @@
-{% extends "base_gineric.html" %}
+{% extends 'base_gineric.html' %}
+{% load crispy_forms_tags %}
 
-{% block title %}<title>Your projects</title>{% endblock %}
-
+{% block title %}<title>Change status</title>{% endblock %}
 {% block content %}
-<div id="my_projects_div">
-    {% if Projects %}
-        {% for project in Projects %}
-            <div class="project_post">
-                    <div class="picture_div_post">
-                        <p class="project_name">{{project.name}}</p>
-                        <img src="{{ project.img.url }}" alt="..." width="176" height="176">
-                    </div>
-                    <div class="description_div_post">
-                        <p>Автор: {{ project.author.full_name }}</p>
-                        <p>Дата: {{ project.apply_date }}</p>
-                        <p>Тип: {{project.get_type_status_display}}</p>
-                        {% if project.author == request.user %}
-                            <a id="delete_btn" href="{% url 'delete_project' project.id %}">Удалить</a>
-                        {% endif %}
-                    </div>
-                </div>
-            <div id="detail_description_div">
-                <p style="font-size: 20px;">Описание:</p><br>
-                <p id="description">{{project.description}}</p><br>
-                <div id="change_status_btns_div">
-                    <a id="back_to_projects" href="{% url 'my_projects' 'All' %}">Назад</a>
-                    <a href="{% url 'confirm_status_change' project.id 'i' %}" class="btn">Установить 'In process'</a>
-                    <a href="{% url 'confirm_status_change' project.id 'd' %}" class="btn">Уставноить 'Done'</a>
-                </div>
-
-            </div>
-        {% endfor %}
-    {% else %}
-        <p>Проектов со статусом 'new' нет!</p>
-    {% endif %}
-</div>
+    <form action="." method="post" id="change_form" enctype="multipart/form-data">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <p><input type="submit" value="Change"></p>
+    </form>
 {% endblock %}

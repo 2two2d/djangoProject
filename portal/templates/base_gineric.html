@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block title %}<title>MainPage</title>{% endblock %}
+    {% block title %}<title>Main page</title>{% endblock %}
 
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -13,13 +13,13 @@
   <header>
       <div>
           <a href="{% url 'main' 'All' %}">Main</a>
-          {% if user.is_authenticated %}
+          {% if user.is_authenticated and not user.is_staff %}
             <a href="{% url 'create_project'%}">Create_Project</a>
             <a href="{% url 'my_projects' 'All'%}">My_projects</a>
-            {% if user.is_staff %}
-                <a href="{% url 'change_status' %}">Change_status</a>
-<!--                <a href=""></a>-->
-            {% endif %}
+          {% endif %}
+          {% if user.is_staff %}
+            <a href="{% url 'change_status' %}">Change_status</a>
+            <a href="{% url 'manage_categories' %}">Manage_categories</a>
           {% endif %}
       </div>
       <div>

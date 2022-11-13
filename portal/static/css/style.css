@@ -245,11 +245,43 @@ form div[id=div_id_img]{
     width: 140px;
 }
 
-#change_status_btns_div > a:nth-child(2), #change_status_btns_div > a:nth-child(3){
+#change_status_btns_div > a{
     font-size: 14px;
 }
 
+form > #div_id_img{
+    position: relative;
+    top: 48px;
+}
 
+#change_form > #div_id_img{
+    position: relative;
+    top: 20px;
+    left: 10px;
+}
 
+#div_id_category{
+    position: relative;
+    top: -20px;
+    left: -100px;
+}
+
+#categories_div{
+    margin: auto;
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 600px;
+    min-height: 40px;
+    background-color: #ccc4b4;
+    border-radius: 10px;
+}
+
+#categories_div > a{
+    text-decoration: none;
+    color: red;
+    font-size: 1.2em;
+}
 
 

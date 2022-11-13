@@ -1,6 +1,6 @@
 {% extends "base_gineric.html" %}
 
-{% block title %}<title>Редактирование</title>{% endblock %}
+{% block title %}<title>Detail</title>{% endblock %}
 
 {% block content %}
     <div id="project_detail">
@@ -21,7 +21,9 @@
             </div>
         <div id="detail_description_div">
             <p style="font-size: 20px;">Описание:</p><br>
-            <p id="description">{{project.description}}</p><br>
+            <p class="description">{{project.description}}</p><br>
+            <p style="font-size: 20px;">Комментарий:</p><br>
+            <p class="description">{{project.com}}</p></br>
             <a id="back_to_projects" href="{% url 'my_projects' 'All' %}">Назад</a>
         </div>
     </div>
