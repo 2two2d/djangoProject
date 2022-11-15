@@ -10,11 +10,9 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-def main_page(request, pk):
-    if pk != 'All':
-        Projects = Project.objects.filter(process_status=pk)
-    else:
-        Projects = Project.objects.all()
+def main_page(request):
+
+    Projects = Project.objects.filter(process_status='d')[0:4]
 
     count = Project.objects.filter(process_status='i').count()
 

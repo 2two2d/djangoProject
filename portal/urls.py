@@ -4,8 +4,8 @@ from django.urls import re_path as url
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
-    url(r'^$', RedirectView.as_view(url='main' '/All'), name='index'),
-    url(r'^main/(?P<pk>\w+)/$', views.main_page, name='main'),
+    url(r'^$', RedirectView.as_view(url='main'), name='index'),
+    url(r'^main/$', views.main_page, name='main'),
     url(r'^registration/$', views.register, name='register'),
     url(r'^createproject/$', views.create_project, name='create_project'),
     url(r'^myprojects/(?P<pk>\w+)/$', views.my_projects, name='my_projects'),

@@ -1,6 +1,6 @@
 {% extends "base_gineric.html" %}
 
-{% block title %}<title>Projects to change</title>{% endblock %}
+{% block title %}<title>Проекты</title>{% endblock %}
 
 {% block content %}
 <div id="my_projects_div">
@@ -24,14 +24,14 @@
                 <p style="font-size: 20px;">Описание:</p><br>
                 <p id="description">{{project.description}}</p><br>
                 <div id="change_status_btns_div">
-                    <a href="{% url 'confirm_status_change' project.id 'i' %}" class="btn">Установить 'In process'</a>
-                    <a href="{% url 'confirm_status_change' project.id 'd' %}" class="btn">Уставноить 'Done'</a>
+                    <a href="{% url 'confirm_status_change' project.id 'i' %}" class="btn">Установить 'В процессе'</a>
+                    <a href="{% url 'confirm_status_change' project.id 'd' %}" class="btn">Уставноить 'Сделано'</a>
                 </div>
 
             </div>
         {% endfor %}
     {% else %}
-        <p>Проектов со статусом 'new' нет!</p>
+        <p>Проектов со статусом 'Новый' нет!</p>
     {% endif %}
 </div>
 {% endblock %}

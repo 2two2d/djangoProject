@@ -1,10 +1,10 @@
 {% extends "base_gineric.html" %}
 
-{% block title %}<title>Success</title>{% endblock %}
+{% block title %}<title>Успех</title>{% endblock %}
 
 {% block content %}
 <div id="back_to_projects_div">
-  <p style="display: block; align-text: center; font-size: 3em">Статус проекта изменён с new на {{ new_Projects.get_process_status_display }}</p>
+  <p style="display: block; align-text: center; font-size: 3em">Статус проекта изменён с 'новый' на {{ new_Projects.get_process_status_display }}</p>
   <a id="back_to_projects" href="{% url 'change_status'%}">Вернуться</a>
 </div>
 {% endblock %}

@@ -39,9 +39,9 @@ class Project(models.Model):
     category = models.ForeignKey(Category, to_field='type', help_text='Категория заявки', blank=False,
                                  on_delete=models.CASCADE)
 
-    PROCESS_STATUS = (('i', 'In process'),
-                      ('d', 'done'),
-                      ('n', 'new'))
+    PROCESS_STATUS = (('i', 'В процессе'),
+                      ('d', 'Готовые'),
+                      ('n', 'Новые'))
 
 
 
@@ -50,7 +50,7 @@ class Project(models.Model):
         choices=PROCESS_STATUS,
         blank=True,
         default='n',
-        help_text='Status of project')
+        help_text='Статус')
 
     def __str__(self):
         return self.name + f'(type - {self.type_status})'

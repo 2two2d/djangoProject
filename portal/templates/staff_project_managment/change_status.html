@@ -1,11 +1,11 @@
 {% extends 'base_gineric.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}<title>Change status</title>{% endblock %}
+{% block title %}<title>Сменить статус</title>{% endblock %}
 {% block content %}
     <form action="." method="post" id="change_form" enctype="multipart/form-data">
         {{ form|crispy }}
         {% csrf_token %}
-        <p><input type="submit" value="Change"></p>
+        <p><input type="submit" value="Установить"></p>
     </form>
 {% endblock %}

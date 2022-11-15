@@ -5,8 +5,7 @@ from django.core.validators import FileExtensionValidator
 from django.core.files.images import get_image_dimensions
 class UserRegistrationForm(forms.ModelForm):
     username = forms.CharField(label='Username', widget=forms.TextInput,
-                               validators=[RegexValidator(r'[a-zA-Z\-]', 'В логине доступны только латинские символы')],
-                               required=True)
+                               validators=[RegexValidator(r'[a-zA-Z\-]', 'В логине доступны только латинские символы')], required=False)
 
     full_name = forms.CharField(label='ФИО', widget=forms.TextInput,
                                 validators=[RegexValidator(r'[а-яА-ЯёЁ\-\s]',
@@ -17,12 +16,25 @@ class UserRegistrationForm(forms.ModelForm):
     password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput, required=True)
     email = forms.EmailField(label='Email', widget=forms.EmailInput, required=True,
                              validators=[EmailValidator('Email не верен')])
-    checkbox = forms.CharField(label='Privet information permission', widget=forms.CheckboxInput,
-                               required=False)
+    checkbox = forms.CharField(label='Privet information permission', widget=forms.CheckboxInput)
 
     class Meta:
         model = User
         fields = ('username', 'email', 'full_name')
+
+    def clean_username(self):
+        cd = self.cleaned_data
+        if not cd['username']:
+            raise forms.ValidationError('Это поле не может быть пустым!')
+        return cd['username']
+
+    def clean_email(self):
+        cd = self.cleaned_data
+        if not '@' in cd['email']:
+            raise forms.ValidationError('Email должен содержать символ @!')
+        return cd['email']
+
+
 
     def clean_password2(self):
         cd = self.cleaned_data
@@ -33,7 +45,7 @@ class UserRegistrationForm(forms.ModelForm):
     def clean_checkbox(self):
         cd = self.cleaned_data
         print(cd['checkbox'])
-        if cd['checkbox'] == False:
+        if not cd['checkbox']:
             raise forms.ValidationError('Подтвердите обработку персональных данных')
         return cd['checkbox']
 
