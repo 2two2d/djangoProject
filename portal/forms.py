@@ -5,34 +5,33 @@ from django.core.validators import FileExtensionValidator
 from django.core.files.images import get_image_dimensions
 class UserRegistrationForm(forms.ModelForm):
     username = forms.CharField(label='Username', widget=forms.TextInput,
-                               validators=[RegexValidator(r'[a-zA-Z\-]', 'В логине доступны только латинские символы')], required=False)
+                               validators=[RegexValidator(r'[a-zA-Z\-]', 'В логине доступны только латинские символы')], required=True)
 
     full_name = forms.CharField(label='ФИО', widget=forms.TextInput,
-                                validators=[RegexValidator(r'[а-яА-ЯёЁ\-\s]',
-                                                           'В ФИО доступна только кириллица, пробелы и дефис')],
-                                required=True)
+                                validators=[RegexValidator(r'[а-яА-ЯёЁ\-\s]','В ФИО доступна только кириллица, пробелы и дефис')],required=True)
 
     password = forms.CharField(label='Password', widget=forms.PasswordInput, required=True)
     password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput, required=True)
     email = forms.EmailField(label='Email', widget=forms.EmailInput, required=True,
                              validators=[EmailValidator('Email не верен')])
-    checkbox = forms.CharField(label='Privet information permission', widget=forms.CheckboxInput)
+    checkbox = forms.BooleanField(label='Privet information permission', widget=forms.CheckboxInput, required=False)
 
     class Meta:
         model = User
         fields = ('username', 'email', 'full_name')
 
-    def clean_username(self):
-        cd = self.cleaned_data
-        if not cd['username']:
-            raise forms.ValidationError('Это поле не может быть пустым!')
-        return cd['username']
 
     def clean_email(self):
         cd = self.cleaned_data
         if not '@' in cd['email']:
-            raise forms.ValidationError('Email должен содержать символ @!')
+            raise forms.ValidationError('Email должен содержать символ '@' !')
         return cd['email']
+
+    def clean_full_name(self):
+        cd = self.cleaned_data
+        if len(cd['full_name'].split(' ')) != 3:
+            raise forms.ValidationError('ФИО должно состоять из трёх слов!')
+        return cd['full_name']
 
 
 
@@ -44,8 +43,7 @@ class UserRegistrationForm(forms.ModelForm):
 
     def clean_checkbox(self):
         cd = self.cleaned_data
-        print(cd['checkbox'])
-        if not cd['checkbox']:
+        if cd['checkbox'] == False:
             raise forms.ValidationError('Подтвердите обработку персональных данных')
         return cd['checkbox']
 
@@ -56,8 +54,8 @@ class ApplicationCreateForm(forms.ModelForm):
         if value.size > limit:
             raise forms.ValidationError('File too large. Size should not exceed 2 MiB.')
 
-    title = forms.CharField(label='Название', widget=forms.TextInput)
-    description = forms.CharField(label='Описание', widget=forms.Textarea)
+    title = forms.CharField(label='Название', widget=forms.TextInput, required=True)
+    description = forms.CharField(label='Описание', widget=forms.Textarea, required=True)
     img = forms.ImageField(label='Изображение', validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'bmp']), file_size], required=False)
     category = forms.ModelChoiceField(queryset=Category.objects.all(), required=True, label='Категория')
 
@@ -89,19 +87,14 @@ class AddImgForm(forms.ModelForm):
         fields = ('img',)
 
 class AddComForm(forms.ModelForm):
-    com = forms.CharField(label='Добавить комментарий', widget=forms.Textarea)
+    com = forms.CharField(label='Добавить комментарий', widget=forms.Textarea, required=True)
 
-    def clean_img(self):
-        cd = self.cleaned_data
-        if not cd['com']:
-            raise forms.ValidationError('Вы не написали комментарий!')
-        return cd['com']
     class Meta:
         model = Project
         fields = ('com',)
 
 class CreateCategoryForm(forms.ModelForm):
-    type = forms.CharField(label='Название новой категории', widget=forms.TextInput)
+    type = forms.CharField(label='Название новой категории', widget=forms.TextInput, required=True)
 
     class Meta:
         model = Category

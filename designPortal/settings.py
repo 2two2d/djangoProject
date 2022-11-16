@@ -76,10 +76,23 @@ WSGI_APPLICATION = 'designPortal.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+        'ENGINE': 'django.db.backends.mysql',
+
+        'NAME': 'gr402bomse$2two2dlocallibrary',
+
+        'USER': 'gr402bomse',
+
+        'PASSWORD': 'max123max',
+
+        'HOST': 'gr402bomse.mysql.pythonanywhere-services.com',
+
+        'PORT': '3306',
+
     }
+
 }
 
 # Password validation
