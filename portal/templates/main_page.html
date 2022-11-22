@@ -11,11 +11,11 @@
         {% for project in Projects %}
             <div class="project_post">
                 <div class="picture_div_post">
-                    <p class="project_name">{{project.name}}</p>
+                    <p class="project_name">{{project.title}}</p>
                     <img src="{{ project.img.url }}" alt="..." width="176" height="176">
                 </div>
                 <div class="description_div_post">
-                    <p>Тип: {{project.category}}</p>
+                    <p>Тип: {{project.category.type}}</p>
                     <p>Процесс: {{project.get_process_status_display}}</p>
                     <p>Дата: {{ project.apply_date }}</p>
                     <a class="show_detail" href="{% url 'detail_project' project.id %}">Подробно</a>

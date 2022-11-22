@@ -67,9 +67,9 @@ def create_project(request):
 def my_projects(request, pk):
 
     if pk != 'All':
-        Projects = Project.objects.filter(process_status=pk, author=request.user)
+        Projects = Project.objects.reverse().filter(process_status=pk, author=request.user)
     else:
-        Projects = Project.objects.filter(author=request.user)
+        Projects = Project.objects.reverse().filter(author=request.user)
 
     count = Project.objects.filter(process_status='i', author=request.user).count()
 
@@ -157,6 +157,7 @@ def change_category(request):
     return render(request, 'staff_project_managment/change_category.html', {'form': form, 'categories': categories})
 
 def category_delete(request, pk):
+    Project.objects.filter(category=Category.objects.get(type=pk)).delete()
     Category.objects.get(type=pk).delete()
     return render(request, 'staff_project_managment/delete_category_success.html')
 

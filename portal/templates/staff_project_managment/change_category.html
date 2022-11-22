@@ -9,7 +9,7 @@
             <a href="{% url 'category_delete' category %}">{{category}}</a>
         {% endfor %}
     </div>
-    <form action="." method="post" id="change_form" enctype="multipart/form-data">
+    <form action="." method="post" id="change_form" enctype="multipart/form-data" novalidate>
         {{ form|crispy }}
         {% csrf_token %}
         <p><input type="submit" value="Создать категорию"></p>

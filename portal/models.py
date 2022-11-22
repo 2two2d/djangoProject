@@ -30,17 +30,16 @@ class Category(models.Model):
 
 class Project(models.Model):
     id = models.AutoField(primary_key=True, unique=True, verbose_name='id')
-    name = models.CharField(max_length=100, verbose_name='Project name')
+    title = models.CharField(max_length=100, verbose_name='Project name')
     description = models.TextField(max_length=400, verbose_name='Description')
     img = models.ImageField(upload_to='img/', verbose_name='picture', null=True)
     apply_date = models.DateTimeField(default=datetime.now(), editable=False)
     author = models.ForeignKey('User', on_delete=models.SET_NULL, verbose_name='Project owner', null=True, blank=True, to_field='id')
     com = models.CharField(max_length=400, verbose_name='Description', default='Этот проект ещё не принят в разработку!')
-    category = models.ForeignKey(Category, to_field='type', help_text='Категория заявки', blank=False,
-                                 on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, help_text='Категория заявки', to_field='type', on_delete=models.CASCADE, blank=False)
 
     PROCESS_STATUS = (('i', 'В процессе'),
-                      ('d', 'Готовые'),
+                      ('d', 'Готовый'),
                       ('n', 'Новые'))
 
 
@@ -53,11 +52,14 @@ class Project(models.Model):
         help_text='Статус')
 
     def __str__(self):
-        return self.name + f'(type - {self.type_status})'
+        return self.title
 
 
     def get_absolute_url(self):
         return reverse('profile_application_detail', args=[str(self.id)])
+
+    class Meta:
+        ordering = ['apply_date']
 
 
 

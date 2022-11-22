@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-bx2o*p-)q=6==nqrl$cd04+xrifqt&o0ysu=zv%#v1)lz^v1)!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gr402bomse.pythonanywhere.com']
 
 
 # Application definition
@@ -75,24 +75,31 @@ WSGI_APPLICATION = 'designPortal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+
+#     'default': {
+
+#         'ENGINE': 'django.db.backends.mysql',
+
+#         'NAME': 'gr402bomse$2two2dlocallibrary',
+
+#         'USER': 'gr402bomse',
+
+#         'PASSWORD': 'max123max',
+
+#         'HOST': 'gr402bomse.mysql.pythonanywhere-services.com',
+
+#         'PORT': '3306',
+
+#     }
+
+# }
+
 DATABASES = {
-
     'default': {
-
-        'ENGINE': 'django.db.backends.mysql',
-
-        'NAME': 'gr402bomse$2two2dlocallibrary',
-
-        'USER': 'gr402bomse',
-
-        'PASSWORD': 'max123max',
-
-        'HOST': 'gr402bomse.mysql.pythonanywhere-services.com',
-
-        'PORT': '3306',
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
-
 }
 
 # Password validation
@@ -119,7 +126,7 @@ AUTH_USER_MODEL = 'portal.User'
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'Asia/Tomsk'
 
