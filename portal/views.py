@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm, ApplicationCreateForm, AddImgForm, AddComForm, CreateCategoryForm
 from django.http import HttpResponseRedirect
 from .models import Project, Category
-from django.views.generic import DetailView, DeleteView
+from django.views.generic import DetailView, DeleteView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -10,13 +10,16 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-def main_page(request):
+class main_page(ListView):
+    model = Project
+    template_name = 'main_page.html'
 
-    Projects = Project.objects.filter(process_status='d')[0:4]
+    def get_context_data(self, **kwargs):
+        context = super(main_page, self).get_context_data(**kwargs)
+        context['Project'] = Project.objects.filter(process_status='d')[0:4]
+        context['count'] = Project.objects.filter(process_status='i').count()
+        return context
 
-    count = Project.objects.filter(process_status='i').count()
-
-    return render(request, 'main_page.html', {'Projects': Projects, 'count_in_process': count})
 
 
 def register(request):
@@ -155,6 +158,7 @@ def change_category(request):
     categories = Category.objects.all()
 
     return render(request, 'staff_project_managment/change_category.html', {'form': form, 'categories': categories})
+
 
 def category_delete(request, pk):
     Project.objects.filter(category=Category.objects.get(type=pk)).delete()
