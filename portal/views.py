@@ -10,14 +10,14 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-class main_page(ListView):
+class MainPage(ListView):
     model = Project
     template_name = 'main_page.html'
 
     def get_context_data(self, **kwargs):
-        context = super(main_page, self).get_context_data(**kwargs)
-        context['Project'] = Project.objects.filter(process_status='d')[0:4]
-        context['count'] = Project.objects.filter(process_status='i').count()
+        context = super().get_context_data(**kwargs)
+        context['Project_list'] = Project.objects.filter(process_status='d')[0:4]
+        context['count_in_process'] = Project.objects.filter(process_status='i').count()
         return context
 
 
